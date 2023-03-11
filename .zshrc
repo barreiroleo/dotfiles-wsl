@@ -1,14 +1,13 @@
-# Language number formats for all shell process. May LANG=en_US.UTF-8
-export LC_NUMERIC=en_US.UTF-8
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
 # Tmux autostart/exit. Preserve at very top.
 # If tmux is executable && Graphical session is running && We aren't already inside a tmux session
 # Start a new session and close terminal at exit.
 if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
     tmux >/dev/null 2>&1 && exit
 fi
+
+# Language number formats for all shell process. May LANG=en_US.UTF-8
+export LC_ALL=C               # Used by fzf
+export LC_NUMERIC=en_US.UTF-8 # Used by qalc
 
 # Skip verification of insecure directories. Linkear configuraciones entre usuario y root.
 ZSH_DISABLE_COMPFIX=true
