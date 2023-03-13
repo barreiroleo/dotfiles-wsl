@@ -110,6 +110,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+alias zshconf="nvim ~/.zshrc"
+alias tmuxconf="nvim ~/.config/tmux/tmux.conf"
+alias nvimconf="cd ~/.config/nvim/lua/"
+
 # run_disown_silence java -jar $DIR/ModbusMechanic.jar
 alias plantuml="run_disown java -jar /opt/PlantUML/plantuml.jar -gui $(pwd)"
 alias plantuml_convert="java -jar /opt/PlantUML/plantuml.jar -tsvg $(pwd)/" # plantuml_convert file.md
