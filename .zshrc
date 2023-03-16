@@ -1,8 +1,8 @@
 # Tmux autostart/exit. Preserve at very top.
 # If tmux is executable && Graphical session is running && We aren't already inside a tmux session
-# Start a new session and close terminal at exit.
+# Start a new session and close terminal at exit. tmux -u force UTF-8
 if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    tmux >/dev/null 2>&1 && exit
+    tmux -u >/dev/null 2>&1 && exit
 fi
 
 # Language number formats for all shell process. May LANG=en_US.UTF-8
