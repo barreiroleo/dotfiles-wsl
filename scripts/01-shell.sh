@@ -3,6 +3,13 @@
 
 sudo apt update -y
 
+if [[ ! "$LANG" == "es_AR.UTF8" ]]; then
+    echo "Actual locale: $LANG"
+    sudo locale-gen "es_AR.UTF-8"
+    sudo dpkg-reconfigure locales
+fi
+echo "[ OK ] Locale configured es_AR.UTF-8"
+
 if [[ ! $(which zsh) ]]; then
     echo "ZSH"
     sudo apt install zsh -y

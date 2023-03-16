@@ -6,7 +6,7 @@ if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
 fi
 
 # Language number formats for all shell process. May LANG=en_US.UTF-8
-export LC_ALL=C               # Used by fzf
+export LC_ALL=es_AR.UTF-8     # Used by fzf
 export LC_NUMERIC=en_US.UTF-8 # Used by qalc
 
 # Skip verification of insecure directories. Linkear configuraciones entre usuario y root.
