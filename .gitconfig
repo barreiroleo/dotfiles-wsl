@@ -43,7 +43,8 @@
     st  = status -sb
     lg  = log --graph --decorate --all
     lgf = log --graph --decorate --all --stat
+    lgm  = log --graph --decorate --all --pretty=full
     # Test:
     # pullforce = !git fetch --all && git reset --hard HEAD && git merge @{u}
-    # pullstash = !git fetch --all && git stash && git merge @{u} && git stash pop   
+    # pullstash = !git fetch --all && git stash && git merge @{u} && git stash pop
     # lgfr = log --graph --decorate --all --name-status

@@ -133,7 +133,8 @@ alias dvim-sync="dvim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
 alias dvim-comp="dvim --headless -c 'PackerCompile' -c 'quitall'"
 alias dvim-test='dvim-comp; docker exec -it nvim nvim -c "cd /root/.config/nvim/lua/test/"'
 
-alias glgf='git lgf'
 alias glg='git lg'
+alias glgm='git lgm'
+alias glgf='git lgf'
 alias gdv='git difftool'
 alias lg='lazygit'

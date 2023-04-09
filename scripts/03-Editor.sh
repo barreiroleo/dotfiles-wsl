@@ -4,7 +4,7 @@
 if [[ ! $(which nvim) ]]; then
     sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt-get update -y
-    sudo apt-get install neovim -y
+    sudo apt-get install neovim unzip -y
 
     sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
     sudo update-alternatives --config vi

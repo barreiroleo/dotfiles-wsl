@@ -36,3 +36,9 @@ if [[ ! $(which fzf) ]]; then
     sudo apt install fzf -y
 fi
 echo "[ OK ] fzf"
+
+if [[ ! $(which rg) ]]; then
+    echo "rg"
+    sudo apt install ripgrep -y
+fi
+echo "[ OK ] ripgrep"
