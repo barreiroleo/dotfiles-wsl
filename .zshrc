@@ -103,6 +103,13 @@ function run_disown_silence(){
     run_disown "$@" 1>/dev/null 2>/dev/null
 }
 
+# $1 Local; $2 Remote
+function diffmerge() {
+    nvim -d "$1" "$1".new "$2" \
+        -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 2<CR>' \
+        -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c 'wincmd w' -c 'read ++edit #'
+}
+
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,

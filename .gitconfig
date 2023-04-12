@@ -15,28 +15,33 @@
     # git config --global pull.rebase true # set up pull to rebase instead of merge
     # rebase = true
 [diff]
-    tool = nvimdiff
-    guitool = nvimdiff
+    tool = nvimdiff_2way
+    guitool = nvimdiff_2way
 [merge]
     # Create extra merge commit when fast forward merge would be possible
     ff = false
-    tool = nvimdiff_4way
-    # Show base code in $MERGED
+    tool = nvimdiff_3way
     conflictstyle = diff3
 [difftool]
     prompt = true
 [mergetool]
     prompt = true
-[difftool "nvimdiff"]
-    cmd = "nvim -d $LOCAL $REMOTE -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
-[mergetool "nvimdiff_2way"]
+
+# LOCAL: the head for the file(s) from the current branch on the machine that you are using.
+# REMOTE: the head for files(s) from a remote location that you are trying to merge into your LOCAL branch.
+# BASE: the common ancestor(s) of LOCAL and REMOTE.
+# MERGED: the tag / HEAD object after the merge - this is saved as a new commit.
+# These cmds are the same as native git nvimdiff but with sortcuts.
+[difftool "nvimdiff_2way"]
     cmd = "nvim -d $LOCAL $REMOTE -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
 [mergetool "nvimdiff_3way"]
-    cmd = "nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
+    cmd = "nvim -d $LOCAL $MERGED $REMOTE \
+        -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 2<CR>' \
+        -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c 'wincmd w'"
 [mergetool "nvimdiff_4way"]
-    # Same as native git nvimdiff but with sortcuts
-    cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J' -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>'"
-
+    cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED \
+        -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 4<CR>' \
+        -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c '$wincmd w' -c 'wincmd J'"
 [format]
     pretty = %C(bold red)%h %C(no-bold white)%s %C(yellow)%d %C("#505050")(%cr: %an)
 [alias]
