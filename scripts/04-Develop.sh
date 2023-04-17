@@ -1,11 +1,25 @@
 #!/bin/bash
 #set -x
-source utils.sh
+# source utils.sh
 
 if [[ ! $(which gcc) || ! $(which clang) ]]; then
     sudo apt-get install build-essential gcc clang make gdb jq -y
 fi
 echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq"
+
+if [[ ! $(which dotnet) ]]; then
+    # Official script: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#register-the-microsoft-package-repository
+    # Get Ubuntu version
+    declare repo_version=$(if command -v lsb_release &> /dev/null; then lsb_release -r -s; else grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"'; fi)
+    # Download Microsoft signing key and repository
+    wget https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+    sudo apt update
+    sudo apt install dotnet-sdk-7.0 -y
+fi
+echo "[ OK ] .NET Core 7"
+
 if [[ ! $(which java) ]]; then
     sudo apt-get --no-install-recommends install default-jdk -y
 fi
