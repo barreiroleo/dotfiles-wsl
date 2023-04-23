@@ -3,9 +3,9 @@
 # source utils.sh
 
 if [[ ! $(which gcc) || ! $(which clang) ]]; then
-    sudo apt-get install build-essential gcc clang make gdb jq -y
+    sudo apt-get install build-essential gcc clang make gdb jq bc -y
 fi
-echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq"
+echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
 
 if [[ ! $(which dotnet) ]]; then
     # Official script: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#register-the-microsoft-package-repository
@@ -20,8 +20,27 @@ if [[ ! $(which dotnet) ]]; then
 fi
 echo "[ OK ] .NET Core 7"
 
-if [[ ! $(which java) ]]; then
-    sudo apt-get --no-install-recommends install default-jdk -y
+function has_java(){
+    version_target=$1
+    java_version=$(java -version 2>&1)
+    regex='version "([0-9]+\.[0-9]+\.[0-9]+).*"'
+    if [[ $java_version =~ $regex ]]; then
+        java_version=${BASH_REMATCH[1]} # Exact version
+        java_version=$(echo $java_version | awk -F'.' '{print $1}') # Major version
+    else
+        echo "Failed to extract Java version"
+        java_version=0
+    fi
+    if [[ $(echo "$java_version >= $version_target" | bc) -eq 1 ]]; then
+        echo "Java version is $version_target or higher"
+        return 0
+    else
+        echo "Java version is lower than $version_target"
+        return 1
+    fi
+}
+if ! has_java 17; then
+    sudo apt-get install openjdk-17-jdk -y
 fi
 echo "[ OK ] Java $(java --version | head -n 1)"
 
