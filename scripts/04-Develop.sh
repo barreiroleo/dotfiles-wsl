@@ -59,6 +59,11 @@ if [[ ! $(which lua) || ! $(which luarocks) ]]; then
 fi
 echo "[ OK ] lua & luarocks (needed for mason tools, null-ls)"
 
+if [[ ! $(which cppcheck) || ! $(which clang-check) ]]; then
+    sudo apt install cppcheck clang-tools
+fi
+echo "[ OK ] cppcheck & clang-tools"
+
 if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
     PLANTUML_VERSION=$(curl -s "https://api.github.com/repos/plantuml/plantuml/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
     curl -Lo plantuml.jar "https://github.com/plantuml/plantuml/releases/latest/download/plantuml-${PLANTUML_VERSION}.jar"
