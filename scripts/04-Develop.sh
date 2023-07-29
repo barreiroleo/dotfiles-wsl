@@ -3,7 +3,9 @@
 # source utils.sh
 
 if [[ ! $(which gcc) || ! $(which clang) ]]; then
-    sudo apt-get install build-essential gcc clang make gdb jq bc -y
+    sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'
+    sudo update
+    sudo apt-get install build-essential gcc clang make cmake gdb jq bc -y
 fi
 echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
 
