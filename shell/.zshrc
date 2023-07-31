@@ -66,7 +66,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(command-not-found zsh-interactive-cd zsh-syntax-highlighting
-         zsh-autosuggestions git vi-mode fzf sudo timer compleat extract)
+        zsh-autosuggestions git vi-mode fzf sudo timer compleat extract)
 
 eval "$(starship init zsh)"
 source $ZSH/oh-my-zsh.sh
@@ -79,11 +79,15 @@ if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ $(which javac) ]; then
+    export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+fi
+
 # The plugin will auto execute this zvm_after_init function.
 # This is for vi-mode plugin compatibility
 zvm_after_init() {
-  source /usr/share/doc/fzf/examples/key-bindings.zsh
-  source /usr/share/doc/fzf/examples/completion.zsh
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+    source /usr/share/doc/fzf/examples/completion.zsh
 }
 
 # Colors
@@ -117,7 +121,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # For a full list of active aliases, run `alias`.
 
 alias zshconf="nvim ~/.zshrc"
-alias tmuxconf="nvim ~/.config/tmux/tmux.conf"
+alias tmuxconf="cd ~/.config/tmux/"
 alias nvimconf="cd ~/.config/nvim/lua/"
 
 # run_disown_silence java -jar $DIR/ModbusMechanic.jar

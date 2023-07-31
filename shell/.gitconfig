@@ -1,6 +1,7 @@
 [user]
     email = a.leo.barreiro@gmail.com
     name = LeoBarreiro
+    useConfigOnly = true
 [credential]
     helper = store
 [init]
@@ -53,3 +54,5 @@
     # pullforce = !git fetch --all && git reset --hard HEAD && git merge @{u}
     # pullstash = !git fetch --all && git stash && git merge @{u} && git stash pop
     # lgfr = log --graph --decorate --all --name-status
+[includeIf "gitdir:~/develop/bootstrap/"]
+    path = ~/develop/bootstrap/.gitconfig
