@@ -6,6 +6,12 @@ if [[ ! $(which gcc) || ! $(which clang) ]]; then
     sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'
     sudo update
     sudo apt-get install build-essential gcc clang clang-tools make cmake gdb jq bc -y
+    echo "If you have throubles with gpg key for clang check the script file. There's some help"
+    # curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/llvm-snapshot.gpg
+    # sudo chmod a+r /etc/apt/keyrings/llvm-snapshot.gpg
+    # echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
+    # echo "deb-src [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee -a /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
+    # cat /etc/apt/sources.list.d/llvm-snapshot.list
 fi
 echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
 
