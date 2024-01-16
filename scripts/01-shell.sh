@@ -3,6 +3,14 @@
 
 sudo apt update -y
 
+if [[ ! $(which xdg-open) ]];then
+    sudo apt-get --no-install-recommends install xdg-utils
+fi
+if [[ ! $(which wslview) ]]; then
+    sudo apt install wslu
+fi
+echo "[ OK ] WSL view browser"
+
 if [[ ! "$LANG" == "es_AR.UTF8" ]]; then
     echo "Actual locale: $LANG"
     sudo locale-gen "es_AR.UTF-8"
