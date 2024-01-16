@@ -1,0 +1,28 @@
+import = [
+    "~/appdata/roaming/alacritty/catppuccin-mocha.toml",
+    "~/.config/dotfiles/alacritty/catppuccin-mocha.toml"
+]
+
+[shell]
+program = "ubuntu"
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+opacity = 1.0
+blur = true
+
+[font]
+normal = { family = "CaskaydiaCove Nerd Font Mono" }
+size = 10.5
+
+[colors]
+transparent_background_colors = true
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Beam" }
+vi_mode_style = { shape = "Block" }
