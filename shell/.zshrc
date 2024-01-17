@@ -129,6 +129,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias zshconf="nvim ~/.zshrc"
 alias tmuxconf="cd ~/.config/tmux/"
 alias nvimconf="cd ~/.config/nvim/lua/"
+alias wezconf="cd ~/.config/wezterm/"
 
 # run_disown_silence java -jar $DIR/ModbusMechanic.jar
 alias plantuml="java -jar ~/.local/bin/plantuml.jar"
