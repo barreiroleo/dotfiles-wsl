@@ -3,28 +3,12 @@
 # source utils.sh
 
 if [[ ! $(which gcc) || ! $(which clang) ]]; then
-    sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'
-    sudo update
-    sudo apt-get install build-essential gcc clang clang-tools make cmake gdb jq bc -y
-    echo "If you have throubles with gpg key for clang check the script file. There's some help"
-    # curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/llvm-snapshot.gpg
-    # sudo chmod a+r /etc/apt/keyrings/llvm-snapshot.gpg
-    # echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
-    # echo "deb-src [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee -a /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
-    # cat /etc/apt/sources.list.d/llvm-snapshot.list
+    sudo pacman -S base-devel gcc clang make cmake gdb jq bc
 fi
-echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
+echo "[ OK ] Build-essential, gcc, clang, make, cmake, gdb, jq, bc"
 
 if [[ ! $(which dotnet) ]]; then
-    # Official script: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#register-the-microsoft-package-repository
-    # Get Ubuntu version
-    declare repo_version=$(if command -v lsb_release &> /dev/null; then lsb_release -r -s; else grep -oP '(?<=^VERSION_ID=).+' /etc/os-release | tr -d '"'; fi)
-    # Download Microsoft signing key and repository
-    wget https://packages.microsoft.com/config/ubuntu/$repo_version/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
-    rm packages-microsoft-prod.deb
-    sudo apt update
-    sudo apt install dotnet-sdk-7.0 -y
+    sudo pacman -S dotnet-sdk
 fi
 echo "[ OK ] .NET Core 7"
 
@@ -48,33 +32,35 @@ function has_java(){
     fi
 }
 if ! has_java 17; then
-    sudo apt-get install openjdk-17-jdk -y
+    # java-runtime-common provides archlinux-java
+    sudo pacman -S jdk-openjdk openjdk-doc java-runtime-common
 fi
 echo "[ OK ] Java $(java --version | head -n 1)"
 
 if [[ ! $(which npm) ]]; then
-    sudo apt-get --no-install-recommends install npm -y
+    sudo pacman -S npm
 fi
 echo "[ OK ] npm (needed for mason)"
 
-if [[ ! $(dpkg -l | grep python3-venv) ]]; then
-    sudo apt-get --no-install-recommends install python3-venv -y
+if [[ ! $(which python) ]]; then
+    sudo pacman -S python
 fi
-echo "[ OK ] python3 venv (needed for mason tools, null-ls)"
+echo "[ OK ] python venv (needed for mason tools, null-ls)"
 
 if [[ ! $(which lua) || ! $(which luarocks) ]]; then
-    sudo apt-get --no-install-recommends install lua5.1 luarocks -y
+    sudo pacman -S lua5.1 luarocks
 fi
 echo "[ OK ] lua & luarocks (needed for mason tools, null-ls)"
 
 if [[ ! $(which cppcheck) || ! $(which clang-check) ]]; then
-    sudo apt install cppcheck clang-tools
+    sudo pacman -S cppcheck clang
 fi
 echo "[ OK ] cppcheck & clang-tools"
 
 if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
     PLANTUML_VERSION=$(curl -s "https://api.github.com/repos/plantuml/plantuml/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
     curl -Lo plantuml.jar "https://github.com/plantuml/plantuml/releases/latest/download/plantuml-${PLANTUML_VERSION}.jar"
+    mkdir -p ~/.local/bin/
     mv plantuml.jar ~/.local/bin/
 fi
 echo "[ OK ] Plantuml downloaded at ~/.local/bin/plantuml.jar"

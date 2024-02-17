@@ -1,26 +1,29 @@
 #!/bin/bash
 #set -x
 
-sudo apt update -y
-
-if [[ ! $(which xdg-open) ]];then
-    sudo apt-get --no-install-recommends install xdg-utils
+if [[ ! $(which xdg-open) ]]; then
+    sudo pacman -Sy xdg-utils
 fi
 if [[ ! $(which wslview) ]]; then
-    sudo apt install wslu
+    curl -O https://pkg.wslutiliti.es/public.key
+    sudo pacman-key --add public.key
+    sudo pacman-key --init
+    sudo pacman-key --lsign-key 2D4C887EB08424F157151C493DD50AA7E055D853
+    echo -e "\n[wslutilities]\nServer = https://pkg.wslutiliti.es/arch/" | sudo tee -a /etc/pacman.conf
+    sudo pacman -Sy wslu
 fi
 echo "[ OK ] WSL view browser"
 
 if [[ ! "$LANG" == "es_AR.UTF8" ]]; then
     echo "Actual locale: $LANG"
-    sudo locale-gen "es_AR.UTF-8"
-    sudo dpkg-reconfigure locales
+    sudo locale-gen "es_AR.UTF-8" "en_US.UTF-8"
+    echo "LANG=en_US.UTF-8" | sudo tee /etc/locale.conf
 fi
 echo "[ OK ] Locale configured es_AR.UTF-8"
 
 if [[ ! $(which zsh) ]]; then
     echo "ZSH"
-    sudo apt install zsh -y
+    sudo pacman -Sy zsh
 fi
 echo "[ OK ] ZSH"
 

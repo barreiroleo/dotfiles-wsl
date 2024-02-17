@@ -2,8 +2,8 @@
 #set -x
 
 if [[ ! $(which stow) ]]; then
-    sudo apt update -y
-    sudo apt-get --no-install-recommends install stow
+    sudo pacman -S stow
+    echo "[ Installing ] Stow"
 fi
 echo "[ OK ] Stow"
 
