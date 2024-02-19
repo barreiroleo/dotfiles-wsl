@@ -73,6 +73,7 @@ fi
 echo "[ OK ] cppcheck & clang-tools"
 
 if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
+    sudo apt-get install --no-install-recommends graphviz -y
     PLANTUML_VERSION=$(curl -s "https://api.github.com/repos/plantuml/plantuml/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
     curl -Lo plantuml.jar "https://github.com/plantuml/plantuml/releases/latest/download/plantuml-${PLANTUML_VERSION}.jar"
     mv plantuml.jar ~/.local/bin/
