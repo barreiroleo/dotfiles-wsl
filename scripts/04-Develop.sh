@@ -12,6 +12,9 @@ if [[ ! $(which gcc) || ! $(which clang) ]]; then
     # echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
     # echo "deb-src [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee -a /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
     # cat /etc/apt/sources.list.d/llvm-snapshot.list
+
+    # libc++ > 14 to get std::format
+    sudo apt install clang libc++-19-dev libc++abi-19-dev
 fi
 echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
 

@@ -17,17 +17,17 @@ end
 ---@field front_end string
 ---@return GPU_Spec
 function M:use_interated_gpu()
-	local _config = { webgpu_preferred_adapter = "LowPower", front_end = "WebGpu" }
-	for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
-		if gpu.backend == "Vulkan" and gpu.device_type == "IntegratedGpu" then
-			_config = {
-				webgpu_preferred_adapter = gpu,
-				front_end = "WebGpu",
-			}
-			break
-		end
-	end
-	return _config
+    local _config = { webgpu_preferred_adapter = "LowPower", front_end = "WebGpu" }
+    for _, gpu in ipairs(wezterm.gui.enumerate_gpus()) do
+        if gpu.backend == "Vulkan" and gpu.device_type == "IntegratedGpu" then
+            _config = {
+                webgpu_preferred_adapter = gpu,
+                front_end = "WebGpu",
+            }
+            break
+        end
+    end
+    return _config
 end
 
 return M
