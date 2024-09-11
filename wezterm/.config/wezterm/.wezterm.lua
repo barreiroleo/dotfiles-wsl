@@ -27,6 +27,7 @@ local config = {
     -- webgpu_power_performance = "LowPower",
     -- webgpu_preferred_adapter = gpu.webgpu_power_performance,
     -- front_end = gpu.front_end,
+    front_end = "WebGpu",
 
     -- Shell
     default_prog = get_default_prog(),
@@ -37,21 +38,19 @@ local config = {
 
     -- Window
     hide_tab_bar_if_only_one_tab = true,
-    inactive_pane_hsb = { saturation = 0.9, brightness = 0.8 },
-    window_background_opacity = 0.95,
+    window_background_opacity = 0.99,
+    window_padding = { left = 2, right = 2, top = 2, bottom = 2, },
 
     -- Fonts
-    font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Regular" }),
-    font_size = 9,
+    font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Light" }),
+    -- font = wezterm.font("Maple Mono NF", { weight = "Light" }),
+    -- font = wezterm.font("VictorMono Nerd Font Propo" ),
+    font_size = 10.25,
+    line_height = 1.00,
 
     -- Colors
     color_scheme = colorscheme.color_scheme,
     color_schemes = colorscheme.color_schemes,
-
-    -- Selection
-
-    -- Cursor
-    default_cursor_style = "BlinkingBar",
 }
 
 return utils:merge_tables(wezterm.config_builder(), config)
