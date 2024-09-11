@@ -129,7 +129,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias zshconf="nvim ~/.zshrc"
 alias tmuxconf="cd ~/.config/tmux/"
 alias nvimconf="cd ~/.config/nvim/lua/"
-alias wezconf="cd ~/.config/wezterm/"
+alias wezconf="cd ~/dotfiles/wezterm/.config/wezterm/"
 
 # run_disown_silence java -jar $DIR/ModbusMechanic.jar
 alias plantuml="java -jar ~/.local/bin/plantuml.jar"
@@ -163,3 +163,6 @@ alias ldc='lazydocker'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/opt/cmake/cmake-3.30.3-linux-x86_64/bin/
