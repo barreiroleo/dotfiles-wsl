@@ -20,6 +20,6 @@ git stash
 apply shell "[ OK ] zsh, bash, profile"
 apply nvim "[ OK ] nvim"
 apply tmux "[ OK ] tmux"
-apply wezterm-arch "[ OK ] wezterm"
+apply wezterm "[ OK ] wezterm"
 git stash apply
 git stash clear

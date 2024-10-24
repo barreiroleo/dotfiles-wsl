@@ -4,20 +4,17 @@ local utils = require("utils")
 local colorscheme = require("colorscheme")
 local gpu = utils:use_interated_gpu()
 
----@return table[string]
+---@return {prog: string[]?, domain: string?}
 local function get_default_prog()
-    local def_cmd = {}
     if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-        def_cmd = { "ubuntu" }
+        return { prog = {"Ubuntu"}, domain = "WSL:Ubuntu" }
     end
-    if wezterm.target_triple == "x86_64-apple-darwin" then
-        def_cmd = {}
-    end
-    if wezterm.target_triple == "x86_65-unknown-linux-gnu" then
-        def_cmd = {}
-    end
-    return def_cmd
+    if wezterm.target_triple == "x86_64-apple-darwin" then end
+    if wezterm.target_triple == "x86_65-unknown-linux-gnu" then end
+    return { prog = nil, domain = nil}
 end
+
+local default_shell = get_default_prog()
 
 wezterm.on('format-window-title', function(_tab, _pane, _tabs, _panes, _config)
     return "wezterm"
@@ -27,11 +24,11 @@ local config = {
     -- webgpu_power_performance = "LowPower",
     -- webgpu_preferred_adapter = gpu.webgpu_power_performance,
     -- front_end = gpu.front_end,
-    front_end = "WebGpu",
+    -- front_end = "WebGpu", -- WebGpu, Software, OpenGL
 
-    -- Shell
-    default_prog = get_default_prog(),
-    default_domain = "WSL:Ubuntu",
+    -- Shell: Native or WSL
+    default_prog = default_shell.prog,
+    default_domain = default_shell.domain,
 
     -- Environment
     -- config.term
@@ -42,8 +39,8 @@ local config = {
     window_padding = { left = 2, right = 2, top = 2, bottom = 2, },
 
     -- Fonts
-    font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Light" }),
-    -- font = wezterm.font("Maple Mono NF", { weight = "Light" }),
+    -- font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Light" }),
+    -- font = wezterm.font("Maple Mono NF", { weight = "Regular" }),
     -- font = wezterm.font("VictorMono Nerd Font Propo" ),
     font_size = 10.25,
     line_height = 1.00,

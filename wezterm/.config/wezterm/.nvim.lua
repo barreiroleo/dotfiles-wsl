@@ -1,3 +1,10 @@
+-- if vim.uv.os_uname().sysname == "Linux" then
+if vim.fn.has("wsl") == 0 then
+    vim.notify("Not wsl. Automirror to /mnt/c/user/ will be skipped.")
+    return
+end
+vim.notify("WSL detected. Automirror to /mnt/c/user/ set on.")
+
 -- -- Copy config to windows's alacritty dir
 vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = { "*.lua" },
