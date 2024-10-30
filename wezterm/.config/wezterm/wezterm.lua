@@ -39,15 +39,16 @@ local config = {
     window_padding = { left = 2, right = 2, top = 2, bottom = 2, },
 
     -- Fonts
-    -- font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Light" }),
+    font = wezterm.font("JetBrainsMono Nerd Font Propo", { stretch = "Expanded", weight = "Regular" }),
     -- font = wezterm.font("Maple Mono NF", { weight = "Regular" }),
     -- font = wezterm.font("VictorMono Nerd Font Propo" ),
     font_size = 10.25,
     line_height = 1.00,
 
     -- Colors
-    color_scheme = colorscheme.color_scheme,
-    color_schemes = colorscheme.color_schemes,
+    color_scheme = 'Colorful Colors (terminal.sexy)'
+    -- color_scheme = colorscheme.color_scheme,
+    -- color_schemes = colorscheme.color_schemes,
 }
 
 return utils:merge_tables(wezterm.config_builder(), config)
