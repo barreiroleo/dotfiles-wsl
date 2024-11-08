@@ -3,7 +3,7 @@
 sudo pacman -Syu --noconfirm
 
 if [[ ! $(which clang) ]];then
-    sudo pacman -S base-devel clang libc++ cmake gdb cppcheck jq bc --noconfirm
+    sudo pacman -S base-devel ninja clang libc++ cmake gdb cppcheck jq bc --noconfirm
 fi
 echo "[ OK ] Base-devel (build-essential), clang, libc++, cmake, gdb, cppcheck jq, bc"
 
@@ -39,6 +39,11 @@ if [[ ! $(which cargo) ]];then
     sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)"
 fi
 echo "[ OK ] Rust"
+
+if [[ ! $(which docker) ]];then
+    sudo pacman -S docker docker-compose
+fi
+echo "[ OK ] docker"
 
 if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
     sudo pacman -S graphviz --noconfirm
