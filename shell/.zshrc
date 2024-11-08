@@ -1,110 +1,34 @@
 # Tmux autostart/exit. Preserve at very top.
 # If tmux is executable && Graphical session is running && We aren't already inside a tmux session
 # Start a new session and close terminal at exit. tmux -u force UTF-8
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    tmux -u >/dev/null 2>&1 && exit
-fi
+# if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+#     tmux -u >/dev/null 2>&1 && exit
+# fi
 
-# Language number formats for all shell process.
-LC_CTYPE=en_US.UTF-8
-LC_ALL=en_US.UTF-8
+# Include binaries locations to PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Skip verification of insecure directories. Linkear configuraciones entre usuario y root.
-ZSH_DISABLE_COMPFIX=true
-
-# Path to your oh-my-zsh installation.
+# ZSH / Oh-my-zsh configs
 export ZSH="$HOME/.oh-my-zsh"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
+ZSH_THEME="robbyrussell"
 HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
+# ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(command-not-found zsh-interactive-cd zsh-syntax-highlighting
-        zsh-autosuggestions git vi-mode fzf sudo timer compleat extract)
-
-eval "$(starship init zsh)"
+plugins=(git sudo vi-mode timer fzf)
 source $ZSH/oh-my-zsh.sh
 
-# Autorefresh packages names after package install
+# Completion system
+# zstyle <pattern> <style> <values>
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+# - Automatically update PATH entries (i.e. after install packages)
+# - Keep directories and files separated
 zstyle ':completion:*' rehash true
+zstyle ':completion:*' list-dirs-first true
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
 
-# Incorpora al PATH los binarios locales ~/.local/bin.
-if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [ $(which javac) ]; then
-    export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-fi
-
-# The plugin will auto execute this zvm_after_init function.
-# This is for vi-mode plugin compatibility
-zvm_after_init() {
-    source /usr/share/doc/fzf/examples/key-bindings.zsh
-    source /usr/share/doc/fzf/examples/completion.zsh
-}
-
-# Colors
-export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:"
-
-# Browser for wsl
-if [[ -n "$WSL_DISTRO_NAME" ]]; then
-    export BROWSER=wslview
-fi
-
-# Escape mode faster (vi-mode plugin)
-export KEYTIMEOUT=20
-export EDITOR=nvim
-
-# Run disown function
-# DIR=$(dirname "${BASH_SOURCE[0]}") # Relative
+# Exec programs and as disowned
+# run_disown the_thing
 function run_disown() {
     "$@" & disown
 }
@@ -112,6 +36,7 @@ function run_disown_silence(){
     run_disown "$@" 1>/dev/null 2>/dev/null
 }
 
+# Use vim as diff viewer
 # $1 Local; $2 Remote
 function diffmerge() {
     nvim -d "$1" "$1".new "$2" \
@@ -119,50 +44,9 @@ function diffmerge() {
         -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c 'wincmd w' -c 'read ++edit #'
 }
 
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# Send a notify at the end of a execution
+# run command x | alert
+alias alert='notify-send --urgency=normal -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
-alias zshconf="nvim ~/.zshrc"
-alias tmuxconf="cd ~/.config/tmux/"
-alias nvimconf="cd ~/.config/nvim/lua/"
-alias wezconf="cd ~/dotfiles/wezterm/.config/wezterm/"
-
-# run_disown_silence java -jar $DIR/ModbusMechanic.jar
-alias plantuml="java -jar ~/.local/bin/plantuml.jar"
-alias plantuml_ascii="java -jar ~/.local/bin/plantuml.jar -tutxt -progress -pipe"
-alias plantuml_md2svg="java -jar ~/.local/bin/plantuml.jar -tsvg $(pwd)/" # plantuml_convert file.md
-alias plantuml_md2asci="java -jar ~/.local/bin/plantuml.jar $(pwd)/"
-alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
-
-alias cat='bat'
-alias ls='lsd --group-dirs=first'
-alias l='ls -l'
-alias lh='ls -a'
-alias la='ls -la'
-alias ll='ls -lah'
-
-alias vim=nvim
-alias dvim='docker start nvim && docker exec -it nvim nvim'
-alias dvim-create='docker run --name nvim -it alpine'
-alias dvim-clean='docker exec -it nvim rm root/.cache/nvim/ root/.local/share/nvim/ -r; sleep 0.5; dvim'
-alias dvim-sync="dvim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
-alias dvim-comp="dvim --headless -c 'PackerCompile' -c 'quitall'"
-alias dvim-test='dvim-comp; docker exec -it nvim nvim -c "cd /root/.config/nvim/lua/test/"'
-
-alias glg='git lg'
-alias glgm='git lgm'
-alias glgf='git lgf'
-alias gdv='git difftool'
-alias lg='lazygit'
-alias ldc='lazydocker'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/opt/cmake/cmake-3.30.3-linux-x86_64/bin/
+# Aliases
+source $HOME/.zshaliases

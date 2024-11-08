@@ -1,0 +1,20 @@
+alias vim=nvim
+
+alias zshconf="nvim ~/.zshrc"
+alias tmuxconf="cd ~/.config/tmux/"
+alias nvimconf="cd ~/.config/nvim/"
+alias wezconf="cd ~/dotfiles/wezterm/.config/wezterm/"
+
+alias plantuml="java -jar ~/.local/bin/plantuml.jar"
+alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
+
+alias ls='ls --color=auto --group-directories-first -F'
+alias ll='ls -lhF'
+alias la='ls -lhavF'
+alias cat='bat'
+
+alias glg='git lg'
+alias lg='lazygit'
+
+alias nvidiaset_integr='sudo envycontrol -s integrated'
+alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3 3'
