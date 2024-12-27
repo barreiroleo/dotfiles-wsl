@@ -1,7 +1,15 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+local leader = { key = 'a', mods = 'ALT', timeout_milliseconds = 5000 }
+
 local keys = {
+    -- Send leader ("Alt-A") to terminal when pressing leader twice.
+    {
+        key = leader.key,
+        mods = "LEADER|" .. leader.mods,
+        action = act.SendKey{key=leader.key, mods=leader.mods}
+    },
     -- Leader + '-'/'|' will split the current pane.
     { key = '|', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = '-', mods = 'LEADER',       action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
@@ -42,4 +50,4 @@ local key_tables = {
     },
 }
 
-return { keys = keys, key_tables = key_tables }
+return { leader = leader, keys = keys, key_tables = key_tables }

@@ -1,33 +1,31 @@
 [user]
+    name = Leo Barreiro
     email = a.leo.barreiro@gmail.com
-    name = LeoBarreiro
-    useConfigOnly = true
 [credential]
-    helper = store
-[init]
-    defaultBranch = master
+	helper = store
 [core]
     editor = nvim
-[fetch]
-    prune = true
 [pull]
-    # git config --global pull.ff only # Disallows non ff merges on pull. Overrides merge.ff when pulling
-    ff = true
-    # git config --global pull.rebase true # set up pull to rebase instead of merge
-    # rebase = true
+    rebase = true
+
+[format]
+    pretty = format:%C(bold red)%h %C(no-bold white)%s %C(yellow)%d %C("#505050")(%cr: %an)
+[alias]
+    st = status -sb
+    lg = log --graph
+    lgp = log --graph --all --pretty=full --author='Leo Barreiro'
+    unpushed = log --branches --not --remotes --graph
+
 [diff]
     tool = nvimdiff_2way
     guitool = nvimdiff_2way
 [merge]
-    # Create extra merge commit when fast forward merge would be possible
-    ff = false
     tool = nvimdiff_3way
     conflictstyle = diff3
 [difftool]
     prompt = true
 [mergetool]
     prompt = true
-
 # LOCAL: the head for the file(s) from the current branch on the machine that you are using.
 # REMOTE: the head for files(s) from a remote location that you are trying to merge into your LOCAL branch.
 # BASE: the common ancestor(s) of LOCAL and REMOTE.
@@ -43,16 +41,3 @@
     cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED \
         -c 'nnoremap dgh :diffget 1<CR>' -c 'nnoremap dgl :diffget 3<CR>' -c 'nnoremap dp :diffput 4<CR>' \
         -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c '$wincmd w' -c 'wincmd J'"
-[format]
-    pretty = %C(bold red)%h %C(no-bold white)%s %C(yellow)%d %C("#505050")(%cr: %an)
-[alias]
-    st  = status -sb
-    lg  = log --graph --decorate --all
-    lgf = log --graph --decorate --all --stat
-    lgm  = log --graph --decorate --all --pretty=full
-    # Test:
-    # pullforce = !git fetch --all && git reset --hard HEAD && git merge @{u}
-    # pullstash = !git fetch --all && git stash && git merge @{u} && git stash pop
-    # lgfr = log --graph --decorate --all --name-status
-[includeIf "gitdir:~/develop/bootstrap/"]
-    path = ~/develop/bootstrap/.gitconfig

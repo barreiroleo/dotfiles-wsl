@@ -26,5 +26,8 @@ return {
             fg_color = '#909090',
         },
     },
+
+    background = "#282c34",
+
     compose_cursor = 'orange' -- Cursor color when leader is active
 }

@@ -5,16 +5,28 @@ alias tmuxconf="cd ~/.config/tmux/"
 alias nvimconf="cd ~/.config/nvim/"
 alias wezconf="cd ~/dotfiles/wezterm/.config/wezterm/"
 
+alias excalidraw='docker run --rm -dit --name excalidraw -p 5000:80 excalidraw/excalidraw:latest && echo http://localhost:5000/'
 alias plantuml="java -jar ~/.local/bin/plantuml.jar"
 alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
 
 alias ls='ls --color=auto --group-directories-first -F'
 alias ll='ls -lhF'
 alias la='ls -lhavF'
-alias cat='bat'
 
+# Git: checkout fuzzy, log alias
+alias gcof='git branch --sort=committerdate | fzf --height=20% --reverse --info=inline | xargs --no-run-if-empty git checkout'
 alias glg='git lg'
 alias lg='lazygit'
 
-alias nvidiaset_integr='sudo envycontrol -s integrated'
-alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3 3'
+# Arch/Ubuntu specific alias
+if command -v pacman &> /dev/null; then
+    alias cat='bat'
+elif command -v apt &> /dev/null; then
+    alias cat='batcat'
+fi
+
+# Nvidia graphics alias
+if command -v envycontrol &> /dev/null; then
+    alias nvidiaset_integr='sudo envycontrol -s integrated'
+    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3 3'
+fi

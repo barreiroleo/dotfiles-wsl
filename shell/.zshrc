@@ -24,8 +24,7 @@ source $ZSH/oh-my-zsh.sh
 # - Automatically update PATH entries (i.e. after install packages)
 # - Keep directories and files separated
 zstyle ':completion:*' rehash true
-zstyle ':completion:*' list-dirs-first true
-zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 
 # Exec programs and as disowned
 # run_disown the_thing
