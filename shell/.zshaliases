@@ -14,7 +14,7 @@ alias ll='ls -lhF'
 alias la='ls -lhavF'
 
 # Git: checkout fuzzy, log alias
-alias gcof='git branch --sort=committerdate | fzf --height=20% --reverse --info=inline | xargs --no-run-if-empty git checkout'
+alias gcof='git branch --sort=committerdate --verbose | fzf --height=20% --reverse --info=inline | awk '\''{print $1}'\'' | xargs --no-run-if-empty git checkout'
 alias glg='git lg'
 alias lg='lazygit'
 

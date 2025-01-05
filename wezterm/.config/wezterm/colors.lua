@@ -1,5 +1,7 @@
-return {
-    tab_bar = {
+local theme = require("theme-mode").GetSchemeForMode()
+
+local colors = {
+    tab_bar        = {
         background = '#0b0022',
         active_tab = {
             bg_color = '#2b2042',
@@ -27,7 +29,14 @@ return {
         },
     },
 
-    background = "#282c34",
+    cursor_bg      = 'white',
+    cursor_fg      = 'black',
+    compose_cursor = 'orange', -- Leader key waiting
 
-    compose_cursor = 'orange' -- Cursor color when leader is active
+    background     = theme.background,
+}
+
+return {
+    color_scheme = theme.color_scheme,
+    colors = colors
 }

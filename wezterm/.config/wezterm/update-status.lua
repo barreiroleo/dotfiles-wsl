@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-field, undefined-doc-name
 
 local wezterm = require("wezterm")
-local colors = require("colors")
+local colors = require("colors").colors
 
 local WARN = string.format("%s  ", wezterm.nerdfonts.cod_warning)
 

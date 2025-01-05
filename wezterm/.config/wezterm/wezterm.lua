@@ -5,8 +5,10 @@ local keymaps = require("keymaps")
 
 local config = wezterm.config_builder()
 
--- Colorscheme
-config.color_scheme = 'Colorful Colors (terminal.sexy)'
+-- Colors
+config.colors = colors.colors
+config.background = colors.background
+config.color_scheme = colors.color_scheme
 
 -- Tabs
 -- config.enable_wayland = true
@@ -14,14 +16,13 @@ config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = false
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
-config.colors = colors
 
 -- Window
 config.window_background_opacity = 1
 config.window_padding = { left = 2, right = 2, top = 2, bottom = 2, }
 
 -- Fonts
-config.font = wezterm.font("JetBrainsMono Nerd Font Propo", { weight = "Medium" })
+config.font = wezterm.font("JetBrainsMono Nerd Font Propo")
 -- font = wezterm.font("Maple Mono NF", { weight = "Regular" }),
 -- font = wezterm.font("VictorMono Nerd Font Propo" ),
 config.font_size = 9.5
