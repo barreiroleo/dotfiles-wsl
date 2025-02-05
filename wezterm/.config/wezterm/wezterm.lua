@@ -23,9 +23,9 @@ config.window_padding = { left = 2, right = 2, top = 2, bottom = 2, }
 
 -- Fonts
 config.font = wezterm.font("JetBrainsMono Nerd Font Propo")
--- font = wezterm.font("Maple Mono NF", { weight = "Regular" }),
--- font = wezterm.font("VictorMono Nerd Font Propo" ),
-config.font_size = 9.5
+-- config.font = wezterm.font("Maple Mono NF", { weight = "Regular" })
+-- config.font = wezterm.font("VictorMono Nerd Font Propo")
+config.font_size = 9.25
 config.line_height = 1.00
 
 -- Keybindings
