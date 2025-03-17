@@ -4,10 +4,12 @@ alias zshconf="nvim ~/.zshrc"
 alias tmuxconf="cd ~/.config/tmux/"
 alias nvimconf="cd ~/.config/nvim/"
 alias wezconf="cd ~/dotfiles/wezterm/.config/wezterm/"
+alias ghostconf="nvim ~/.config/ghostty/config"
 
 alias excalidraw='docker run --rm -dit --name excalidraw -p 5000:80 excalidraw/excalidraw:latest && echo http://localhost:5000/'
 alias plantuml="java -jar ~/.local/bin/plantuml.jar"
 alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
+alias cursor="run_disown_silence /opt/cursor/cursor"
 
 alias ls='ls --color=auto --group-directories-first -F'
 alias ll='ls -lhF'
@@ -25,8 +27,14 @@ elif command -v apt &> /dev/null; then
     alias cat='batcat'
 fi
 
+if command -v pacman &> /dev/null; then
+    alias cleanup="yay -Scc && sudo dua i /"
+elif command -v apt &> /dev/null; then
+    alias cleanup="sudo apt autoclean && sudo apt autoremove && sudo dua i /"
+fi
+
 # Nvidia graphics alias
 if command -v envycontrol &> /dev/null; then
     alias nvidiaset_integr='sudo envycontrol -s integrated'
-    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3 3'
+    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3'
 fi

@@ -53,3 +53,14 @@ if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
     mv plantuml.jar ~/.local/bin/
 fi
 echo "[ OK ] Plantuml downloaded at ~/.local/bin/plantuml.jar"
+
+if [[ ! $(which virt-manager) ]]; then
+    https://tanis.codes/posts/virt-manager-qemu-arch-linux/
+    # sudo pacman -Syu libvirt virt-manager qemu-full dnsmasq dmidecode
+    sudo pacman -Syu libvirt virt-manager qemu-base qemu-desktop dnsmasq dmidecode
+    sudo systemctl enable --now libvirtd.service virtlogd.service
+    sudo usermod -aG libvirt ${USER}
+    sudo virsh net-autostart default && sudo virsh net-start default
+    echo "Ensure that any files/folders outside of Virt-managers default pool are owned by the libvirt-qemu group"
+    echo "sudo chown ${USER}:libvirt-qemu /path/to/vm/folder"
+fi

@@ -13,7 +13,7 @@ config.color_scheme = colors.color_scheme
 -- Tabs
 -- config.enable_wayland = true
 config.window_decorations = "RESIZE"
-config.hide_tab_bar_if_only_one_tab = false
+config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 
@@ -25,7 +25,7 @@ config.window_padding = { left = 2, right = 2, top = 2, bottom = 2, }
 config.font = wezterm.font("JetBrainsMono Nerd Font Propo")
 -- config.font = wezterm.font("Maple Mono NF", { weight = "Regular" })
 -- config.font = wezterm.font("VictorMono Nerd Font Propo")
-config.font_size = 9.25
+config.font_size = 9.0
 config.line_height = 1.00
 
 -- Keybindings
