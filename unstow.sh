@@ -21,5 +21,7 @@ git stash
 apply shell "[ OK ] zsh, bash, profile"
 apply nvim "[ OK ] nvim"
 apply tmux "[ OK ] tmux"
+apply wezterm "[ OK ] wezterm"
+apply ghostty "[ OK ] ghostty"
 git stash apply
 git stash clear

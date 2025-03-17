@@ -25,8 +25,14 @@ elif command -v apt &> /dev/null; then
     alias cat='batcat'
 fi
 
+if command -v pacman &> /dev/null; then
+    alias cleanup="yay -Scc && sudo dua i /"
+elif command -v apt &> /dev/null; then
+    alias cleanup="sudo apt autoclean && sudo apt autoremove && sudo dua i /"
+fi
+
 # Nvidia graphics alias
 if command -v envycontrol &> /dev/null; then
     alias nvidiaset_integr='sudo envycontrol -s integrated'
-    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3 3'
+    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3'
 fi
