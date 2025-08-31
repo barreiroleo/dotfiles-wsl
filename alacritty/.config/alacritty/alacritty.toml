@@ -1,28 +1,17 @@
-import = [
-    "~/appdata/roaming/alacritty/catppuccin-mocha.toml",
-    "~/.config/dotfiles/alacritty/catppuccin-mocha.toml"
+[terminal.shell]
+program = "wsl"
+args = [
+    "--distribution", "ArchLinux",
+    "--cd", "~",
+    "-- tmux"
 ]
 
-[shell]
-program = "ubuntu"
-
-[env]
-TERM = "xterm-256color"
-
-[window]
-opacity = 1.0
-blur = true
-
 [font]
-normal = { family = "CaskaydiaCove Nerd Font Mono" }
-size = 10.5
+normal = { family = "JetBrainsMono Nerd Font" }
+size = 9
 
-[colors]
-transparent_background_colors = true
-
-[selection]
-save_to_clipboard = true
-
-[cursor]
-style = { shape = "Beam" }
-vi_mode_style = { shape = "Block" }
+# [general]
+# import = [
+#     "~/appdata/roaming/alacritty/catppuccin-mocha.toml",
+#     "~/.config/dotfiles/alacritty/catppuccin-mocha.toml"
+# ]

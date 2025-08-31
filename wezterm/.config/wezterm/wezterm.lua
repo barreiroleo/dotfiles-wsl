@@ -3,7 +3,24 @@ local update_status = require("update-status")
 local colors = require("colors")
 local keymaps = require("keymaps")
 
+---@return {prog: string[]?, domain: string?}
+local function get_default_prog()
+    if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+        -- return { prog = {"Ubuntu"}, domain = "WSL:Ubuntu" }
+        return { prog = {"ubuntu"}, domain = "WSL:archlinux" }
+    end
+    if wezterm.target_triple == "x86_64-apple-darwin" then end
+    if wezterm.target_triple == "x86_65-unknown-linux-gnu" then end
+    return { prog = nil, domain = nil}
+end
+
+local default_shell = get_default_prog()
+
 local config = wezterm.config_builder()
+
+-- Shell: Native or WSL
+config.default_prog = default_shell.prog
+config.default_domain = default_shell.domain
 
 -- Colors
 config.colors = colors.colors
