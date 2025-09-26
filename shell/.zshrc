@@ -47,5 +47,10 @@ function diffmerge() {
 # run command x | alert
 alias alert='notify-send --urgency=normal -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Enable "C-x + e" for edit-command-line in $EDITOR
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+
 # Aliases
 source $HOME/.zshaliases

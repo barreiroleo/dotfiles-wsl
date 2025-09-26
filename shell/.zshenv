@@ -1,3 +1,5 @@
+export EDITOR="nvim"
+
 # Browser for wsl
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
     export BROWSER=wslview
