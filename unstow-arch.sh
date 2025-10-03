@@ -22,5 +22,6 @@ apply nvim "[ OK ] nvim"
 apply tmux "[ OK ] tmux"
 apply wezterm "[ OK ] wezterm"
 apply ghostty "[ OK ] ghostty"
+apply opencode "[ OK ] opencode"
 git stash apply
 git stash clear
