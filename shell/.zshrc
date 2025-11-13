@@ -15,16 +15,19 @@ HYPHEN_INSENSITIVE="true"
 # ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git sudo vi-mode timer fzf)
-source $ZSH/oh-my-zsh.sh
+plugins=(git sudo vi-mode timer fzf nvm)
 
 # Completion system
 # zstyle <pattern> <style> <values>
 # :completion:<function>:<completer>:<command>:<argument>:<tag>
 # - Automatically update PATH entries (i.e. after install packages)
 # - Keep directories and files separated
+# - Lazy load nvm plugin
 zstyle ':completion:*' rehash true
 zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
+zstyle ':omz:plugins:nvm' lazy yes
+
+source $ZSH/oh-my-zsh.sh
 
 # Exec programs and as disowned
 # run_disown the_thing
@@ -54,3 +57,4 @@ bindkey '^xe' edit-command-line
 
 # Aliases
 source $HOME/.zshaliases
+source $HOME/.zshenv
