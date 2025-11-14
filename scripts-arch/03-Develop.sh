@@ -18,12 +18,12 @@ fi
 echo "[ OK ] Java Development Kit"
 
 if [[ ! $(which node) ]];then
-    sh -c "$(curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh)"
-    source ~/.zshrc
-    nvm install node
-    nvm use node
+    curl -fsSL https://fnm.vercel.app/install | bash
+    mkdir -p ~/.oh-my-zsh/completions/
+    fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
+    fnm install v25
 fi
-echo "[ OK ] NVM & NodeJS"
+echo "[ OK ] FNM & NodeJS"
 
 if [[ ! $(which lua) ]];then
     sudo pacman -S lua51 luarocks luajit --noconfirm

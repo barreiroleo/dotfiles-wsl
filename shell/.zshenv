@@ -12,8 +12,13 @@ fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fnm
+FNM_PATH="${HOME}/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
 
 # Go
 export PATH=$PATH:/usr/local/go/bin

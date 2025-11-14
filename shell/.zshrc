@@ -1,3 +1,6 @@
+# Uncomment to run profiler. Add `zprof` at the end of the file to see results.
+# zmodload zsh/zprof
+#
 # Tmux autostart/exit. Preserve at very top.
 # If tmux is executable && Graphical session is running && We aren't already inside a tmux session
 # Start a new session and close terminal at exit. tmux -u force UTF-8
@@ -15,17 +18,15 @@ HYPHEN_INSENSITIVE="true"
 # ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git sudo vi-mode timer fzf nvm)
+plugins=(git sudo vi-mode timer fzf)
 
 # Completion system
 # zstyle <pattern> <style> <values>
 # :completion:<function>:<completer>:<command>:<argument>:<tag>
 # - Automatically update PATH entries (i.e. after install packages)
 # - Keep directories and files separated
-# - Lazy load nvm plugin
 zstyle ':completion:*' rehash true
 zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
-zstyle ':omz:plugins:nvm' lazy yes
 
 source $ZSH/oh-my-zsh.sh
 
