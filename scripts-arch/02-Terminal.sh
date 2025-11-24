@@ -37,3 +37,8 @@ if [[ ! $(which rg) ]]; then
     sudo pacman -S ripgrep-all --noconfirm
 fi
 echo "[ OK ] ripgrep"
+
+if [[ ! $(which fd) ]]; then
+    sudo pacman -S fd --noconfirm
+fi
+echo "[ OK ] fd"
