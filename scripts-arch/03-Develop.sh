@@ -2,6 +2,11 @@
 #set -x
 sudo pacman -Syu --noconfirm
 
+if [[ ! $(which man) ]]; then
+    sudo pacman -S man-pages man-pages-es --noconfirm
+fi
+echo "[ OK ] Man pages installed"
+
 if [[ ! $(which clang) ]];then
     sudo pacman -S base-devel ninja clang libc++ cmake gdb cppcheck jq bc --noconfirm
 fi

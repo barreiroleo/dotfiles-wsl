@@ -13,6 +13,9 @@ sed -i -e "s/droidmaster/${USER}/g" startxfce4_arch.sh
 echo "Installing archlinux distro"
 proot-distro install archlinux
 
+echo "Setup host storage"
+termux-setup-storage
+
 echo "Post install script"
 proot-distro copy ./post-install.sh archlinux:/tmp/post-install.sh
 proot-distro login archlinux -- /tmp/post-install.sh
