@@ -1,4 +1,5 @@
 export EDITOR="nvim"
+export MANPAGER='nvim +Man!'
 
 # Browser for wsl
 if [[ -n "$WSL_DISTRO_NAME" ]]; then
