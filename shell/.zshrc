@@ -47,6 +47,23 @@ function diffmerge() {
         -c 'nnoremap ZZ :wqall<CR>' -c 'nnoremap ZQ :quitall<CR>' -c 'wincmd w' -c 'read ++edit #'
 }
 
+# Ripgrep search and pipe to jq to postprocess the results as csv format. E.g:
+# rg_to_csv "foo::(bar|fizz)([ |>,&*{(::)])" > output.csv
+function rg_to_csv() {
+    rg "$1" --json | jq -s -r '
+      .[] |
+      select(.type == "match") |
+      ( .data.path.text as $fullpath |
+        ($fullpath | capture("^(?<dir>.*)/(?<file>[^/]+)$")) as $p |
+        [
+          $p.dir,
+          $p.file,
+          (.data.lines.text | gsub("\n"; " ")),
+          .data.line_number
+        ] |
+      @csv)'
+}
+
 # Send a notify at the end of a execution
 # run command x | alert
 alias alert='notify-send --urgency=normal -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
