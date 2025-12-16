@@ -3,6 +3,12 @@
 # source utils.sh
 
 if [[ ! $(which gcc) || ! $(which clang) ]]; then
+    echo "Build essential - GCC"
+    sudo apt-get install build-essential gcc make ninja-build python3-pip python3-venv graphviz openjdk-21-jdk -y
+    sudo apt install gcc-14 g++-14 libgcc-14-dev libstdc++-14-dev
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 60
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 60
+
     sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'
     sudo update
     sudo apt-get install build-essential gcc clang clang-tools make cmake gdb jq bc -y

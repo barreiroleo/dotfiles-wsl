@@ -12,6 +12,11 @@ if [[ ! $(which clang) ]];then
 fi
 echo "[ OK ] Base-devel (build-essential), clang, libc++, cmake, gdb, cppcheck jq, bc"
 
+if [[ ! $(which uv)]]; then
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+echo "[OK] Python UV manager"
+
 if [[ ! $(which dotnet) ]];then
     sudo pacman -S dotnet-runtime dotnet-sdk --noconfirm
 fi

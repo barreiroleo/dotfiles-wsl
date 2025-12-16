@@ -23,5 +23,6 @@ apply tmux "[ OK ] tmux"
 apply wezterm "[ OK ] wezterm"
 apply ghostty "[ OK ] ghostty"
 apply opencode "[ OK ] opencode"
+apply i3 "[ OK ] i3"
 git stash apply
 git stash clear

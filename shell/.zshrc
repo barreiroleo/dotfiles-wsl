@@ -31,12 +31,11 @@ zstyle ':completion:*:*:*:*:descriptions' format '%F{cyan}-- %d --%f'
 source $ZSH/oh-my-zsh.sh
 
 # Exec programs and as disowned
-# run_disown the_thing
-function run_disown() {
+function run-disown() {
     "$@" & disown
 }
-function run_disown_silence(){
-    run_disown "$@" 1>/dev/null 2>/dev/null
+function run-disown-silence(){
+    run-disown "$@" 1>/dev/null 2>/dev/null
 }
 
 # Use vim as diff viewer
@@ -49,7 +48,7 @@ function diffmerge() {
 
 # Ripgrep search and pipe to jq to postprocess the results as csv format. E.g:
 # rg_to_csv "foo::(bar|fizz)([ |>,&*{(::)])" > output.csv
-function rg_to_csv() {
+function rg-to-csv() {
     rg "$1" --json | jq -s -r '
       .[] |
       select(.type == "match") |
@@ -62,6 +61,11 @@ function rg_to_csv() {
           .data.line_number
         ] |
       @csv)'
+}
+
+function launch-termux-i3() {
+    am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity
+    dbus-run-session i3 >/dev/null 2>&1 & disown
 }
 
 # Send a notify at the end of a execution

@@ -4,7 +4,8 @@ USER="leonardo"
 
 echo "Tip: Run termux-reset for clean install"
 pkg update
-pkg install curl x11-repo termux-x11-nightly pulseaudio proot-distro
+pkg upgrade
+pkg install tur-repo curl wget git x11-repo termux-x11-nightly pulseaudio proot-distro
 
 echo "Downloading starting script"
 curl -O https://raw.githubusercontent.com/LinuxDroidMaster/Termux-Desktops/main/scripts/proot_arch/startxfce4_arch.sh
