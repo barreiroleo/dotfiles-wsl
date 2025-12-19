@@ -2,6 +2,7 @@
 #set -x
 
 sudo apt update -y
+sudo apt install curl wget -y
 
 if [[ ! $(which xdg-open) ]];then
     sudo apt-get --no-install-recommends install xdg-utils
@@ -26,8 +27,7 @@ echo "[ OK ] ZSH"
 
 if [[ ! -d ~/.oh-my-zsh/ ]]; then
     echo "ZSH Oh my zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
 fi
 echo "[ OK ] ZSH Oh my zsh"
 

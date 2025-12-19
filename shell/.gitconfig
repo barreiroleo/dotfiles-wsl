@@ -16,6 +16,8 @@
     lg = log --graph
     lgp = log --graph --all --pretty=full --author='Leo Barreiro'
     unpushed = log --branches --not --remotes --graph
+    push-gerrit = push origin HEAD:refs/for/main
+    push-for-wip = push origin HEAD:refs/for/main%wip
 
 [diff]
     tool = nvimdiff_2way

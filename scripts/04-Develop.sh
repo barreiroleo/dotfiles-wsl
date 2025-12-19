@@ -1,29 +1,89 @@
 #!/bin/bash
 #set -x
-# source utils.sh
 
-if [[ ! $(which gcc) || ! $(which clang) ]]; then
+sudo apt update -y
+
+if [[ ! $(which gcc) ]]; then
     echo "Build essential - GCC"
-    sudo apt-get install build-essential gcc make ninja-build python3-pip python3-venv graphviz openjdk-21-jdk -y
+    sudo apt-get install build-essential gcc make ninja-build python3-pip python3-venv graphviz gdb jq bc openjdk-21-jdk -y
+
     sudo apt install gcc-14 g++-14 libgcc-14-dev libstdc++-14-dev
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 60
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 60
-
-    sudo add-apt-repository 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy main'
-    sudo update
-    sudo apt-get install build-essential gcc clang clang-tools make cmake gdb jq bc -y
-    echo "If you have throubles with gpg key for clang check the script file. There's some help"
-    # curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/llvm-snapshot.gpg
-    # sudo chmod a+r /etc/apt/keyrings/llvm-snapshot.gpg
-    # echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
-    # echo "deb-src [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/"$(. /etc/os-release && echo "$VERSION_CODENAME")"/ llvm-toolchain-"$(. /etc/os-release && echo "$VERSION_CODENAME")" main" | sudo tee -a /etc/apt/sources.list.d/llvm-snapshot.list > /dev/null
-    # cat /etc/apt/sources.list.d/llvm-snapshot.list
-
-    # libc++ > 14 to get std::format
-    sudo apt install clang libc++-19-dev libc++abi-19-dev
 fi
-echo "[ OK ] Build-essential, gcc, clang, make, gdb, cmake, jq, bc"
+echo "[ OK ] Build essential - GCC"
 
+if [[ ! $(which clang) ]]; then
+    echo "LLVM and Clang"
+    echo "deb http://apt.llvm.org/noble/ llvm-toolchain-noble main" | sudo tee -a /etc/apt/sources.list.d/llvm.list
+    echo "deb-src http://apt.llvm.org/noble/ llvm-toolchain-noble main" | sudo tee -a /etc/apt/sources.list.d/llvm.list
+    wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+    sudo apt update -y
+    sudo apt install clang clang-tools clangd clang-tidy clang-format lld libc++-dev -y
+    sudo update-alternatives --set cc $(which clang)
+    sudo update-alternatives --set c++ $(which clang++)
+fi
+echo "[ OK ] LLVM Clang"
+
+if [[ ! $(which cmake) ]]; then
+    echo "Cmake"
+    sudo snap install cmake --classic
+fi
+echo "[ OK ] Cmake"
+
+if [[ ! $(which npm) ]]; then
+    # If there's already a NVM_DIR configured in ~/.zshenv, then the path should be exist.
+    if [[ -n ${NVM_DIR} ]];
+        then mkdir -p ${NVM_DIR}
+    fi
+    # From nodejs' doc
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+    # in lieu of restarting the shell
+    \. "$HOME/.nvm/nvm.sh"
+    # Download and install Node.js:
+    nvm install 22
+    node -v && nvm current && npm -v
+fi
+echo "[ OK ] Nodejs - npm"
+
+if [[ ! $(which pipx) ]]; then
+    sudo apt install pipx
+    pipx ensurepath
+fi
+echo "[ OK ] Pipx"
+
+if [[ ! $(which docker) ]]; then
+    # From docker's doc
+    # Add Docker's official GPG key:
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add the repository to Apt sources:
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+        $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+    # Post install
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+fi
+echo "[ OK ] Docker"
+
+if [[ ! $(which openconnect) ]]; then
+   echo 'deb http://download.opensuse.org/repositories/home:/bluca:/openconnect/Ubuntu_24.04/ /' | sudo tee /etc/apt/sources.list.d/home:bluca:openconnect.list
+   curl -fsSL https://download.opensuse.org/repositories/home:bluca:openconnect/Ubuntu_24.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_bluca_openconnect.gpg > /dev/null
+   sudo apt update
+   sudo apt install openconnect network-manager-openconnect-gnome -y
+fi
+
+echo "[ OK ] Openconnect"
 if [[ ! $(which dotnet) ]]; then
     # Official script: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#register-the-microsoft-package-repository
     # Get Ubuntu version
@@ -37,49 +97,10 @@ if [[ ! $(which dotnet) ]]; then
 fi
 echo "[ OK ] .NET Core 7"
 
-function has_java(){
-    version_target=$1
-    java_version=$(java -version 2>&1)
-    regex='version "([0-9]+\.[0-9]+\.[0-9]+).*"'
-    if [[ $java_version =~ $regex ]]; then
-        java_version=${BASH_REMATCH[1]} # Exact version
-        java_version=$(echo $java_version | awk -F'.' '{print $1}') # Major version
-    else
-        echo "Failed to extract Java version"
-        java_version=0
-    fi
-    if [[ $(echo "$java_version >= $version_target" | bc) -eq 1 ]]; then
-        echo "Java version is $version_target or higher"
-        return 0
-    else
-        echo "Java version is lower than $version_target"
-        return 1
-    fi
-}
-if ! has_java 17; then
-    sudo apt-get install openjdk-17-jdk -y
-fi
-echo "[ OK ] Java $(java --version | head -n 1)"
-
-if [[ ! $(which npm) ]]; then
-    sudo apt-get --no-install-recommends install npm -y
-fi
-echo "[ OK ] npm (needed for mason)"
-
-if [[ ! $(dpkg -l | grep python3-venv) ]]; then
-    sudo apt-get --no-install-recommends install python3-venv -y
-fi
-echo "[ OK ] python3 venv (needed for mason tools, null-ls)"
-
 if [[ ! $(which lua) || ! $(which luarocks) ]]; then
     sudo apt-get --no-install-recommends install lua5.1 luarocks -y
 fi
 echo "[ OK ] lua & luarocks (needed for mason tools, null-ls)"
-
-if [[ ! $(which cppcheck) || ! $(which clang-check) ]]; then
-    sudo apt install cppcheck clang-tools
-fi
-echo "[ OK ] cppcheck & clang-tools"
 
 if [[ ! -f ~/.local/bin/plantuml.jar ]]; then
     sudo apt-get install --no-install-recommends graphviz -y

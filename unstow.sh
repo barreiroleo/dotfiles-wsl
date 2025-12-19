@@ -8,8 +8,8 @@ fi
 echo "[ OK ] Stow"
 
 function apply(){
-    pack=$1
-    msg=$2
+    local pack=$1
+    local msg=$2
     stow --adopt -v $pack
     git restore .
     stow --restow -v $pack

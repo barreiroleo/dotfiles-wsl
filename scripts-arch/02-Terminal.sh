@@ -29,6 +29,7 @@ echo "[ OK ] batcat"
 if [[ ! $(which fzf) ]]; then
     echo "fzf"
     sudo pacman -S fzf --noconfirm
+    git clone --depth 1 https://github.com/junegunn/fzf-git.sh.git ${HOME}/.fzf-git.sh
 fi
 echo "[ OK ] fzf"
 
