@@ -11,7 +11,11 @@ alias plantuml="java -jar ~/.local/bin/plantuml.jar"
 alias plantuml_gui="run_disown java -jar ~/.local/bin/plantuml.jar -gui $(pwd)"
 alias cursor="run_disown_silence /opt/cursor/cursor"
 
-alias ls='ls --color=auto --group-directories-first -F'
+if command -v lsd &> /dev/null; then
+    alias ls='lsd --color=auto --group-dirs=first -F --date "+%d-%m-%Y %H:%M:%S"'
+else
+    alias ls='ls --color=auto --group-directories-first -F'
+fi
 alias ll='ls -lhF'
 alias la='ls -lhavF'
 

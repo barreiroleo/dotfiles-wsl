@@ -42,3 +42,7 @@ if [[ ! $(which fd) ]]; then
     sudo pacman -S fd --noconfirm
 fi
 echo "[ OK ] fd"
+
+if command -v delta &> /dev/null; then
+    sudo pacman -S git-delta --noconfirm
+fi

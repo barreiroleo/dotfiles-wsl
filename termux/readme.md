@@ -7,6 +7,6 @@
 > ./install-arch.sh
 > ./install-font.sh
 
-3. Move start.sh to the home and remove the dotfiles folder
+3. Move launcher.sh to the home and remove the dotfiles folder
 
-4. Run start.sh
+4. Run launcher.sh

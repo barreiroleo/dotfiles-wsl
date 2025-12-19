@@ -78,5 +78,6 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 
 # Aliases
+source $HOME/.config/fzf-custom.sh
 source $HOME/.zshaliases
 source $HOME/.zshenv

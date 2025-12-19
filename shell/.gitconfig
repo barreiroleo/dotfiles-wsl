@@ -5,6 +5,7 @@
 	helper = store
 [core]
     editor = nvim
+    pager = delta
 [pull]
     rebase = true
 
@@ -22,13 +23,20 @@
     algorithm = histogram
 [merge]
     tool = nvimdiff_3way
-    conflictstyle = zdiff3
+    conflictStyle = zdiff3
 [rebase]
     autosquash = true
 [difftool]
     prompt = true
 [mergetool]
     prompt = true
+
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true # use n and N
+    side-by-side = true
+    line-numbers = true
 # LOCAL: the head for the file(s) from the current branch on the machine that you are using.
 # REMOTE: the head for files(s) from a remote location that you are trying to merge into your LOCAL branch.
 # BASE: the common ancestor(s) of LOCAL and REMOTE.
