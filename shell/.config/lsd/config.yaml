@@ -1,0 +1,5 @@
+color:
+  when: auto
+sorting:
+  dir-grouping: first
+date: '+%d-%m-%Y %H:%M:%S'
