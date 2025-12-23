@@ -18,8 +18,13 @@
     unpushed = log --branches --not --remotes --graph
     push-gerrit = push origin HEAD:refs/for/main
     push-for-wip = push origin HEAD:refs/for/main%wip
+    # Difftastic
+    dlog = -c diff.external=difft log -p --ext-diff
+    dshow = -c diff.external=difft show --ext-diff
+    ddiff = -c diff.external=difft diff
 
 [diff]
+    # difftastic as default difftool: tool = difftastic; external = difft
     tool = nvimdiff_2way
     guitool = nvimdiff_2way
     algorithm = histogram
@@ -32,6 +37,8 @@
     prompt = true
 [mergetool]
     prompt = true
+[pager]
+    difftool = true
 
 [interactive]
     diffFilter = delta --color-only
@@ -39,6 +46,13 @@
     navigate = true # use n and N
     side-by-side = true
     line-numbers = true
+
+[difftool "difftastic"]
+    # See `man git-difftool` for a description of MERGED, LOCAL and REMOTE.
+    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+
+[difftool "nvim_difftool"]
+    cmd = nvim -c 'packadd nvim.difftool' -c 'DiffTool $LOCAL $REMOTE'
 # LOCAL: the head for the file(s) from the current branch on the machine that you are using.
 # REMOTE: the head for files(s) from a remote location that you are trying to merge into your LOCAL branch.
 # BASE: the common ancestor(s) of LOCAL and REMOTE.
