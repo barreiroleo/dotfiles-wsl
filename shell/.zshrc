@@ -75,7 +75,16 @@ alias alert='notify-send --urgency=normal -i "$([ $? = 0 ] && echo terminal || e
 # Enable "C-x + e" for edit-command-line in $EDITOR
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
+# chpwd hooks
+function chpwd_python_hook() {
+    if [[ -d .venv ]]; then
+        source .venv/bin/activate
+    fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd chpwd_python_hook
 
 # Aliases
 source $HOME/.config/fzf-custom.sh  # Run _fzf_git_list_bindings
