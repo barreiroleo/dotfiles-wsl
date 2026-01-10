@@ -24,5 +24,8 @@ apply wezterm "[ OK ] wezterm"
 apply ghostty "[ OK ] ghostty"
 apply opencode "[ OK ] opencode"
 apply i3 "[ OK ] i3"
+apply niri "[ OK ] niri"
+apply hypr "[ OK ] hypr"
+apply sway "[ OK ] sway"
 git stash apply
 git stash clear
