@@ -69,9 +69,12 @@ overview {
     }
 }
 
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 environment {
-  XDG_CURRENT_DESKTOP "niri"
+    XDG_CURRENT_DESKTOP "niri"
+    // Fix dead keys in GTK apps (ghostty)
+    GTK_IM_MODULE "ibus"
+    QT_IM_MODULE "ibus"
+    XMODIFIERS "@im=ibus"
 }
 hotkey-overlay {
     skip-at-startup
@@ -153,10 +156,10 @@ window-rule {
     match app-id="kitty"
     draw-border-with-background false
 }
-window-rule {
-    match is-active=false
-    opacity 0.9
-}
+// window-rule {
+//     match is-active=false
+//     opacity 0.9
+// }
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id="zoom"
@@ -178,6 +181,8 @@ recent-windows {
     }
 }
 
+spawn-sh-at-startup "tailscale systray"
+
 debug {
     honor-xdg-activation-with-invalid-serial
     wait-for-frame-completion-before-queueing // Fix mirrored external displays
@@ -198,3 +203,7 @@ include "dms/colors.kdl"
 include "dms/layout.kdl"
 include "dms/alttab.kdl"
 include "dms/binds.kdl"
+
+include "dms/windowrules.kdl"
+
+include "dms/cursor.kdl"
