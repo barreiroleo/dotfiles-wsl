@@ -32,7 +32,7 @@ elif command -v apt &> /dev/null; then
 fi
 
 if command -v pacman &> /dev/null; then
-    alias cleanup="yay -Scc && sudo dua i /"
+    alias cleanup="sudo rm -rf /var/cache/pacman/pkg/download-* ; yay -Scc && sudo dua i /"
 elif command -v apt &> /dev/null; then
     alias cleanup="sudo apt autoclean && sudo apt autoremove && sudo dua i /"
 fi
