@@ -28,6 +28,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Go
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
 
 # Cmake when manually install
 # export PATH=$PATH:/opt/cmake/cmake-3.30.3-linux-x86_64/bin/

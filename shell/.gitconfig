@@ -44,7 +44,7 @@
     diffFilter = delta --color-only
 [delta]
     navigate = true # use n and N
-    side-by-side = true
+    side-by-side = false
     line-numbers = true
 
 [difftool "difftastic"]

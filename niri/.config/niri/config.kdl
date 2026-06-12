@@ -72,6 +72,7 @@ overview {
 environment {
     XDG_CURRENT_DESKTOP "niri"
     // Fix dead keys in GTK apps (ghostty)
+    // Set also in DMS: ~/.config/environment.d/90-dms.conf
     GTK_IM_MODULE "ibus"
     QT_IM_MODULE "ibus"
     XMODIFIERS "@im=ibus"
