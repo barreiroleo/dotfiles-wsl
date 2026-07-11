@@ -1,6 +1,9 @@
 #!/bin/bash
 #set -x
 
+GREEN='\033[0;32m'
+NC='\033[0m'
+
 if [[ ! $(which stow) ]]; then
     sudo pacman -S stow
 fi
@@ -29,3 +32,9 @@ apply hypr "[ OK ] hypr"
 apply sway "[ OK ] sway"
 git stash apply
 git stash clear
+
+echo
+echo -e "${GREEN}Remember to manually install the following packages:${NC}"
+echo
+echo "https://localsend.org/es"
+echo "https://wayscriber.com/#install"

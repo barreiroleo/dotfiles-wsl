@@ -12,6 +12,11 @@ font-size = 9.0
 
 theme = dark:Ghostty Default Style Dark,light:Alabaster
 #background = #21212b
+background = #101418
+foreground = #e0e2e8
+cursor-color = #9dcbfb
+selection-background = #124a73
+selection-foreground = #e0e2e8
 
 keybind = ctrl+shift+n=new_window
 # Black magic to forward the leader key to a child application like tmux

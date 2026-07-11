@@ -21,7 +21,6 @@
             "models": {
                 "gpt-oss:latest": {
                     "name": "GPT-oss",
-                    "tool" : true,
                     "reasoning": true,
                     "options": {
                         "reasoningEffort": "high",
@@ -31,8 +30,17 @@
                             "reasoning.encrypted_content"
                         ]
                     }
+                },
+                "gemma4:12b-32k": {
+                    "name": "gemma4:12b-32k",
+                    "id": "gemma4:12b-32k",
+                    "tool_call": true,
+                    "options": {
+                        "temperature": 0.1
+                    }
                 }
             }
         }
-    }
+    },
+    "shell": "/usr/bin/zsh"
 }

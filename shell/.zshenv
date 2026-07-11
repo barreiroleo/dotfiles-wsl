@@ -34,9 +34,6 @@ export PATH=$PATH:$HOME/go/bin
 # export PATH=$PATH:/opt/cmake/cmake-3.30.3-linux-x86_64/bin/
 
 # Rust
-if [[ -d ${HOME}/.cargo/env ]]; then
+if [[ -d ${HOME}/.cargo/ ]]; then
   . "$HOME/.cargo/env"
 fi
-
-# opencode
-export PATH=${HOME}/.opencode/bin:$PATH
