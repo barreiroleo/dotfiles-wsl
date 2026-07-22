@@ -1,28 +1,40 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "permission": {
-        "edit": "allow",
-        "webfetch": "ask",
-        "bash": {
-            "*": "ask",
-            "git status": "allow",
-            "git diff": "allow",
-            "ls": "allow",
-            "pwd": "allow"
+    "permissions": [
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "webfetch", "resource": "*", "effect": "ask" },
+        { "action": "shell", "resource": "*", "effect": "ask" },
+        { "action": "shell", "resource": "git status", "effect": "allow" },
+        { "action": "shell", "resource": "git diff", "effect": "allow" },
+        { "action": "shell", "resource": "ls *", "effect": "allow" },
+        { "action": "shell", "resource": "find *", "effect": "allow" },
+        { "action": "shell", "resource": "cat *", "effect": "allow" },
+        { "action": "shell", "resource": "sed -n *", "effect": "allow" },
+        { "action": "shell", "resource": "pwd", "effect": "allow" }
+    ],
+    "mcp": {
+        "servers": {
+            "chrome-devtools": {
+                "type": "local",
+                "command": ["npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics", "--no-performance-crux", "-e", "/usr/bin/chromium"],
+                "environment": {
+                    "CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS": "1"
+                }
+            }
         }
     },
-    "provider": {
+    "providers": {
         "ollama": {
-            "npm": "@ai-sdk/openai-compatible",
+            "package": "aisdk:@ai-sdk/openai-compatible",
             "name": "Ollama (local)",
-            "options": {
+            "settings": {
                 "baseURL": "http://localhost:11434/v1"
             },
             "models": {
                 "gpt-oss:latest": {
                     "name": "GPT-oss",
                     "reasoning": true,
-                    "options": {
+                    "settings": {
                         "reasoningEffort": "high",
                         "textVerbosity": "low",
                         "reasoningSummary": "auto",
@@ -33,9 +45,11 @@
                 },
                 "gemma4:12b-32k": {
                     "name": "gemma4:12b-32k",
-                    "id": "gemma4:12b-32k",
-                    "tool_call": true,
-                    "options": {
+                    "modelID": "gemma4:12b-32k",
+                    "capabilities": {
+                        "tools": true
+                    },
+                    "settings": {
                         "temperature": 0.1
                     }
                 }

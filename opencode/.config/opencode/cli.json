@@ -1,0 +1,37 @@
+{
+  "theme": {
+    "name": "opencode",
+    "mode": "system"
+  },
+  "diffs": {
+    "wrap": "word",
+    "view": "auto",
+    "single": true
+  },
+  "session": {
+    "sidebar": "auto",
+    "scrollbar": true,
+    "thinking": "hide",
+    "grouping": "auto",
+    "markdown": "rendered"
+  },
+  "animations": true,
+  "debug": {
+    "turn_tokens": true,
+    "devtools": true,
+    "timing": false
+  },
+  "attention": {
+    "enabled": true,
+    "notifications": true,
+    "sound": true,
+    "volume": 1
+  },
+  "prompt": {
+    "paste": "compact"
+  },
+  "tabs": {
+    "layout": "horizontal",
+    "scope": "cwd"
+  }
+}
