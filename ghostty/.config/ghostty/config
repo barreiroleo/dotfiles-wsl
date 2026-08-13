@@ -7,16 +7,23 @@ gtk-wide-tabs = false
 command=tmux new
 window-padding-y=0
 
-font-family = "JetBrainsMono Nerd Font"
-font-size = 9.0
+font-size = 14
 
-theme = dark:Ghostty Default Style Dark,light:Alabaster
-#background = #21212b
-background = #101418
-foreground = #e0e2e8
-cursor-color = #9dcbfb
-selection-background = #124a73
-selection-foreground = #e0e2e8
+# Berkeley Mono; Ioskeley Mono; JetBrainsMono Nerd Font; Maple Mono NF
+font-family             = "Ioskeley Mono"
+font-family-bold        = "Ioskeley Mono"
+font-family-italic      = "Maple Mono NF"
+font-family-bold-italic = "Maple Mono NF"
+
+# Force symbols and nerd fonts from JetBrains Mono: https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
+font-codepoint-map = U+23fb-U+23fe,U+2500-U+259f,U+2630,U+2665,U+26a1,U+276c-U+2771,U+2800-U+28ff=JetBrainsMono Nerd font Mono
+font-codepoint-map = U+2b58,U+e000-U+e00a,U+e0a0-U+e0a2,U+e0a3,U+e0b0-U+e0b3,U+e0b4-U+e0c8,U+e0ca=JetBrainsMono Nerd font Mono
+font-codepoint-map = U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6bb,U+e700-U+e958,U+ea60-U+ec84=JetBrainsMono Nerd font Mono
+font-codepoint-map = U+ed00-U+efce,U+ee00-U+ee0b,U+f000-U+f2ff,U+f300-U+f384,U+f400-U+f533,U+f500-U+fd46=JetBrainsMono Nerd font Mono
+# Dingbats (E.g: ➜ 🡪 ➔ ➙ ➘)
+font-codepoint-map = U+2700-U+27BF=JetBrainsMono Nerd font Mono
+
+theme = dark:CustomDark,light:Alabaster
 
 keybind = ctrl+shift+n=new_window
 # Black magic to forward the leader key to a child application like tmux

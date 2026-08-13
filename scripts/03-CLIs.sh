@@ -3,15 +3,15 @@
 
 sudo apt update -y
 
-if [[ ! -d ~/.local/share/fonts/jetbrains ]]; then
+if [[ ! -d ~/.local/share/fonts/JetBrains ]]; then
     echo "JetBrains"
-    mkdir -p /tmp/fonts/jetbrains/ ~/.local/share/fonts/jetbrains/ ~/.local/share/fonts/iosevka/
+    mkdir -p /tmp/fonts/JetBrains/ ~/.local/share/fonts/JetBrains/ ~/.local/share/fonts/Iosevka/
     wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip -O /tmp/fonts/JetBrainsMono.zip
-    wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip -O /tmp/fonts/Iosevka.zip
-    unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts/jetbrains/
-    unzip -q /tmp/fonts/Iosevka.zip -d /tmp/fonts/iosevka/
-    mv /tmp/fonts/jetbrains/*.ttf ~/.local/share/fonts/jetbrains/
-    mv /tmp/fonts/iosevka/*.ttf ~/.local/share/fonts/iosevka/
+    wget -q --show-progress https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Iosevka.zip -O /tmp/fonts/Iosevka.zip
+    unzip -q /tmp/fonts/JetBrainsMono.zip -d /tmp/fonts/JetBrains/
+    unzip -q /tmp/fonts/Iosevka.zip -d /tmp/fonts/Iosevka/
+    mv /tmp/fonts/JetBrains/*.ttf ~/.local/share/fonts/JetBrains/
+    mv /tmp/fonts/Iosevka/*.ttf ~/.local/share/fonts/Iosevka/
     fc-cache -fv
 fi
 echo "[ OK ] Fonts"
