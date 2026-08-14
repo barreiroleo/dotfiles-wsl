@@ -2,6 +2,8 @@
 name: refactor-docs
 description: Refactor a directory or set of technical/design documents to eliminate redundancy, contradictions, and confusion. Enforces single-source-of-truth for definitions, prefers simplicity, and ensures math concepts reference their variables. Use when the user wants to consolidate, clean up, or refactor project documentation.
 disable-model-invocation: true
+metadata:
+    opencode/autoinvoke: false
 ---
 
 The user provides a directory or a list of documents.
