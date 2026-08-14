@@ -1,0 +1,65 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  // Behavior
+  "vim_mode": true,
+
+  // Fonts
+  "terminal": {
+    "font_family": "IoskeleyMono Nerd Font"
+  },
+  "buffer_font_family": "IoskeleyMono Nerd Font",
+  "buffer_font_size": 14.0,
+  "buffer_line_height": "standard",
+  "ui_font_size": 16,
+
+  // Visuals
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Kanagawa Dragon",
+  },
+
+  // Layout
+  "diff_view_style": "split",
+  "git_panel": { "dock": "left" },
+  "debugger": { "dock": "left" },
+  "outline_panel": { "dock": "left" },
+  "project_panel": { "dock": "left" },
+
+  // Agents
+  "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "OpenCode2": {
+      "type": "custom",
+      "command": "opencode2",
+      "args": ["acp"]
+    }
+  },
+
+  // Telemetry
+  "edit_predictions": {
+    "allow_data_collection": "no"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false,
+  },
+}

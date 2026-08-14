@@ -30,6 +30,7 @@ apply i3 "[ OK ] i3"
 apply niri "[ OK ] niri"
 apply hypr "[ OK ] hypr"
 apply sway "[ OK ] sway"
+apply zed "[ OK ] zed"
 git stash apply
 git stash clear
 

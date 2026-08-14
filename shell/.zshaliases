@@ -1,4 +1,5 @@
 alias vim=nvim
+alias vimn="NVIM_APPNAME=nvim-native nvim"
 
 alias zshconf="nvim ~/.zshrc"
 alias tmuxconf="cd ~/.config/tmux/"
