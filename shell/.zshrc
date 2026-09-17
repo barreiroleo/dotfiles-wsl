@@ -18,7 +18,7 @@ HYPHEN_INSENSITIVE="true"
 # ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(git sudo vi-mode timer fzf)
+plugins=(git sudo vi-mode timer fzf zsh-autosuggestions zsh-syntax-highlighting)
 
 # Completion system
 # zstyle <pattern> <style> <values>

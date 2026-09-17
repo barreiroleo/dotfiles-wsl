@@ -39,7 +39,11 @@ elif command -v apt &> /dev/null; then
 fi
 
 # Nvidia graphics alias
-if command -v envycontrol &> /dev/null; then
-    alias nvidiaset_integr='sudo envycontrol -s integrated'
-    alias nvidiaset_hybrid='sudo envycontrol -s hybrid --rtd3'
+if command -v cardwire &> /dev/null; then
+    NVIDIA_CARDWIRE_ID=$(cardwire list | grep NVIDIA | awk '{print $1}')
+    alias nvidia-get-mode="cardwire get"
+    alias nvidia-set-integrated="cardwire set integrated"
+    alias nvidia-set-hybrid="cardwire set hybrid"
+    alias nvidia-launch-cmd="cardwire launch"
+    alias nvidia-get-in-use="cardwire gpu ${NVIDIA_CARDWIRE_ID} --lsof"
 fi

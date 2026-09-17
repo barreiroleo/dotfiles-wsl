@@ -37,3 +37,6 @@ export PATH=$PATH:$HOME/go/bin
 if [[ -d ${HOME}/.cargo/ ]]; then
   . "$HOME/.cargo/env"
 fi
+
+# opencode
+export PATH=$PATH:$HOME/.opencode/bin
