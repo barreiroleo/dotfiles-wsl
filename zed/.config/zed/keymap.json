@@ -23,7 +23,8 @@
       ", f g": "text_finder::Toggle",
       ", f f": "file_finder::Toggle",
       ", .": "buffer_search::Deploy",
-      ", b d": "workspace::CloseItemInAllPanes"
+      ", b d": "workspace::CloseItemInAllPanes",
+      "g h": "git::ToggleStaged",
     }
   },
   {

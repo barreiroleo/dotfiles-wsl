@@ -7,13 +7,13 @@ gtk-wide-tabs = false
 command=tmux new
 window-padding-y=0
 
-font-size = 14
+font-size = 10.5
 
 # Berkeley Mono; Ioskeley Mono; JetBrainsMono Nerd Font; Maple Mono NF
-font-family             = "Ioskeley Mono"
-font-family-bold        = "Ioskeley Mono"
-font-family-italic      = "Maple Mono NF"
-font-family-bold-italic = "Maple Mono NF"
+font-family             = "Berkeley Mono"
+font-family-bold        = "Berkeley Mono"
+# font-family-italic      = "Maple Mono NF"
+# font-family-bold-italic = "Maple Mono NF"
 
 # Force symbols and nerd fonts from JetBrains Mono: https://github.com/ryanoasis/nerd-fonts/wiki/Glyph-Sets-and-Code-Points
 font-codepoint-map = U+23fb-U+23fe,U+2500-U+259f,U+2630,U+2665,U+26a1,U+276c-U+2771,U+2800-U+28ff=JetBrainsMono Nerd font Mono

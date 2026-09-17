@@ -8,7 +8,14 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   // Behavior
+  "preferred_line_length": 120,
+  "document_symbols": "on",
+  "code_lens": "menu",
   "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
 
   // Fonts
   "terminal": {
@@ -20,6 +27,12 @@
   "ui_font_size": 16,
 
   // Visuals
+  "semantic_tokens": "combined",
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
   "icon_theme": {
     "mode": "system",
     "light": "Zed (Default)",
@@ -27,16 +40,19 @@
   },
   "theme": {
     "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Kanagawa Dragon",
+    "light": "Gruvbox Material",
+    "dark": "Gruvbox Material"
   },
 
   // Layout
-  "diff_view_style": "split",
+  "diff_view_style": "unified",
   "git_panel": { "dock": "left" },
   "debugger": { "dock": "left" },
   "outline_panel": { "dock": "left" },
-  "project_panel": { "dock": "left" },
+  "project_panel": { "git_status_indicator": true,
+                     "diagnostic_badges": true,
+                     "entry_spacing": "comfortable",
+                     "dock": "left" },
 
   // Agents
   "agent": {
@@ -47,6 +63,22 @@
   },
   "agent_servers": {
     "OpenCode2": {
+      "favorite_config_option_values": {
+        "mode": [
+          "implement-simple"
+        ],
+        "model": [
+          "opencode-go/gpt-5.6-luna"
+        ],
+        "effort": [
+          "high"
+        ]
+      },
+      "default_config_options": {
+        "mode": "implement-simple",
+        "effort": "high",
+        "model": "opencode-go/gpt-5.6-luna"
+      },
       "type": "custom",
       "command": "opencode2",
       "args": ["acp"]
