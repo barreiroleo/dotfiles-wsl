@@ -4,13 +4,25 @@
         { "action": "edit", "resource": "*", "effect": "allow" },
         { "action": "webfetch", "resource": "*", "effect": "ask" },
         { "action": "shell", "resource": "*", "effect": "ask" },
-        { "action": "shell", "resource": "git status", "effect": "allow" },
-        { "action": "shell", "resource": "git diff", "effect": "allow" },
+        { "action": "shell", "resource": "git --help *", "effect": "allow" },
+        { "action": "shell", "resource": "git status *", "effect": "allow" },
+        { "action": "shell", "resource": "git diff *", "effect": "allow" },
+        { "action": "shell", "resource": "git grep *", "effect": "allow" },
+        { "action": "shell", "resource": "git log *", "effect": "allow" },
+        { "action": "shell", "resource": "git show *", "effect": "allow" },
         { "action": "shell", "resource": "ls *", "effect": "allow" },
         { "action": "shell", "resource": "find *", "effect": "allow" },
         { "action": "shell", "resource": "cat *", "effect": "allow" },
+        { "action": "shell", "resource": "file *", "effect": "allow" },
+        { "action": "shell", "resource": "grep *", "effect": "allow" },
+        { "action": "shell", "resource": "jq *", "effect": "allow" },
+        { "action": "shell", "resource": "sort *", "effect": "allow" },
+        { "action": "shell", "resource": "head *", "effect": "allow" },
         { "action": "shell", "resource": "sed -n *", "effect": "allow" },
         { "action": "shell", "resource": "pwd", "effect": "allow" }
+    ],
+    "plugins": [
+        "~/develop/plugins/subagent"
     ],
     "mcp": {
         "servers": {
